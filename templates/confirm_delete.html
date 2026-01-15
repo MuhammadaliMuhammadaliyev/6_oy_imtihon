@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "O‘chirishni tasdiqlash" %}{% endblock %}
+
+{% block content %}
+<div class="grid">
+
+  <div class="card half">
+    <div class="h1">{% trans "O‘chirishni tasdiqlash" %}</div>
+    <div class="muted">{% trans "Bu amalni ortga qaytarib bo‘lmaydi" %}</div>
+
+    <div class="hr"></div>
+
+    <p>{% trans "Rostdan ham ushbu ma’lumotni o‘chirmoqchimisiz?" %}</p>
+
+    <form method="post" class="row">
+      {% csrf_token %}
+      <button class="btn danger" type="submit">{% trans "Ha, o‘chirish" %}</button>
+      <a class="btn ghost" href="javascript:history.back()">{% trans "Bekor qilish" %}</a>
+    </form>
+
+  </div>
+
+</div>
+{% endblock %}

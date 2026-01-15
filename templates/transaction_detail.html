@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Tranzaksiya" %}{% endblock %}
+
+{% block content %}
+<div class="grid">
+
+  <div class="card">
+    <div class="row" style="justify-content:space-between">
+      <div>
+        <div class="h1" style="font-size:20px; margin:0">{% trans "Tranzaksiya" %}</div>
+        <div class="muted">{% trans "Batafsil ma’lumot va izohlar" %}</div>
+      </div>
+
+      <div class="row">
+        <a class="btn ghost" href="{% url 'finance:dashboard' %}">← {% trans "Dashboard" %}</a>
+        <a class="btn" href="{% url 'finance:transaction_update' transaction.id %}">{% trans "Tahrirlash" %}</a>
+        <form method="post" action="{% url 'finance:transaction_delete' transaction.id %}">
+          {% csrf_token %}
+          <button class="btn danger" type="submit">{% trans "O‘chirish" %}</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="row" style="gap:10px; flex-wrap:wrap">
+      {% if transaction.type == "IN" %}
+        <span class="badge in">{% trans "Kirim" %}</span>
+      {% else %}
+        <span class="badge ex">{% trans "Chiqim" %}</span>
+      {% endif %}
+      <span class="badge">📅 {{ transaction.date }}</span>
+      <span class="badge">🏷 {{ transaction.category }}</span>
+      <span class="badge">💳 {{ transaction.account }}</span>
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="kpi" style="max-width:260px">
+      <div class="label">{% trans "Summa" %}</div>
+      <div class="value">{{ transaction.amount }}</div>
+    </div>
+
+    {% if transaction.note %}
+      <div class="hr"></div>
+      <div class="flash">
+        <div class="muted" style="margin-bottom:6px">{% trans "Izoh (note)" %}</div>
+        <div>{{ transaction.note }}</div>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <div class="row" style="justify-content:space-between">
+      <div class="h1" style="font-size:18px; margin:0">{% trans "Izohlar" %}</div>
+      <span class="muted">{% blocktrans with n=transaction.comments.all|length %}{{ n }} ta{% endblocktrans %}</span>
+    </div>
+
+    <div class="hr"></div>
+
+    {% for c in transaction.comments.all %}
+      <div class="flash" style="margin-bottom:10px">
+        <div class="row" style="justify-content:space-between">
+          <b>{{ c.user.username }}</b>
+          <span class="muted" style="font-size:12px">{{ c.created_at|date:"Y-m-d H:i" }}</span>
+        </div>
+        <div style="margin-top:8px">{{ c.text }}</div>
+      </div>
+    {% empty %}
+      <div class="muted">{% trans "Izoh yo‘q" %}</div>
+    {% endfor %}
+
+    <div class="hr"></div>
+
+    <div class="h1" style="font-size:18px; margin:0 0 8px 0">{% trans "Izoh qo‘shish" %}</div>
+
+    <form method="post" class="form-grid">
+      {% csrf_token %}
+
+      <div class="col-12">
+        <div class="field">
+          <label>{% trans "Izoh matni" %}</label>
+          {{ form.text }}
+        </div>
+      </div>
+
+      <div class="col-12 row">
+        <button class="btn success" type="submit">{% trans "Izoh qo‘shish" %}</button>
+      </div>
+    </form>
+
+  </div>
+
+</div>
+{% endblock %}

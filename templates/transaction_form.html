@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Tranzaksiya form" %}{% endblock %}
+
+{% block content %}
+<div class="grid">
+
+  <div class="card">
+    <div class="row" style="justify-content:space-between">
+      <div>
+        <div class="h1">{% trans "Tranzaksiya qo‘shish / tahrirlash" %}</div>
+        <div class="muted">{% trans "Kirim yoki chiqimni kiriting" %}</div>
+      </div>
+
+      <a class="btn ghost" href="{% url 'finance:dashboard' %}">← {% trans "Dashboard" %}</a>
+    </div>
+
+    <div class="hr"></div>
+
+    <form method="post" class="form-grid">
+      {% csrf_token %}
+
+      <div class="col-4">
+        <div class="field">
+          <label>{% trans "Turi" %}</label>
+          {{ form.type }}
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="field">
+          <label>{% trans "Kategoriya" %}</label>
+          {{ form.category }}
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="field">
+          <label>{% trans "Valyuta" %}</label>
+          {{ form.currency }}
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="field">
+          <label>{% trans "Hisob turi" %}</label>
+          {{ form.account }}
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="field">
+          <label>{% trans "Summa" %}</label>
+          <div style="display:flex; gap:8px; align-items:center;">
+            {{ form.amount }}
+            <span id="currencyLabel" class="badge">---</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="field">
+          <label>{% trans "Sana" %}</label>
+          {{ form.date }}
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="field">
+          <label>{% trans "Izoh (note)" %}</label>
+          {{ form.note }}
+        </div>
+      </div>
+
+      <div class="col-12 row">
+        <button class="btn success" type="submit">{% trans "Saqlash" %}</button>
+        <a class="btn ghost" href="{% url 'finance:dashboard' %}">{% trans "Bekor qilish" %}</a>
+      </div>
+    </form>
+
+  </div>
+
+</div>
+
+<script>
+  const currencySelect = document.getElementById("id_currency");
+  const accountSelect  = document.getElementById("id_account");
+  const currencyLabel  = document.getElementById("currencyLabel");
+
+  function fillCurrency(){
+    const cur = currencySelect ? currencySelect.value : "";
+    currencyLabel.innerText = cur ? cur : "---";
+  }
+
+  function filterAccounts(){
+    if(!currencySelect || !accountSelect) return;
+    const cur = currencySelect.value;
+
+    let firstVisible = null;
+
+    for(const opt of accountSelect.options){
+      const isMatch = opt.text.includes(cur === "USD" ? "Dollar" : "So'm");
+      opt.hidden = !isMatch;
+      opt.disabled = !isMatch;
+      if(isMatch && !firstVisible) firstVisible = opt;
+    }
+
+    const selected = accountSelect.options[accountSelect.selectedIndex];
+    if(selected && (selected.hidden || selected.disabled)){
+      if(firstVisible){
+        accountSelect.value = firstVisible.value;
+      } else {
+        accountSelect.value = "";
+      }
+    }
+
+    fillCurrency();
+  }
+
+  if(currencySelect){
+    currencySelect.addEventListener("change", filterAccounts);
+  }
+  if(accountSelect){
+    accountSelect.addEventListener("change", fillCurrency);
+  }
+
+  filterAccounts();
+</script>
+
+{% endblock %}

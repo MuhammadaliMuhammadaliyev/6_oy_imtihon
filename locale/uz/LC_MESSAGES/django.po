@@ -1,0 +1,147 @@
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-15 16:51+0500\n"
+"Language: uz\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#: .\templates\base.html:8 .\templates\base.html:16
+msgid "Kirim-Chiqim"
+msgstr "Kirim-Chiqim"
+
+#: .\templates\base.html:17
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: .\templates\base.html:18 .\templates\users\profile.html:43
+msgid "Hisoblar"
+msgstr "Hisoblar"
+
+#: .\templates\base.html:19
+msgid "Kategoriyalar"
+msgstr "Kategoriyalar"
+
+#: .\templates\base.html:20
+msgid "Oylik hisobot"
+msgstr "Oylik hisobot"
+
+#: .\templates\base.html:44
+msgid "Chiqish"
+msgstr "Chiqish"
+
+#: .\templates\base.html:47 .\templates\users\login.html:3
+#: .\templates\users\login.html:40 .\templates\users\register.html:40
+msgid "Kirish"
+msgstr "Kirish"
+
+#: .\templates\base.html:48 .\templates\users\login.html:41
+#: .\templates\users\register.html:3 .\templates\users\register.html:9
+#: .\templates\users\register.html:39
+msgid "Ro‘yxatdan o‘tish"
+msgstr "Ro‘yxatdan o‘tish"
+
+#: .\templates\users\login.html:9
+msgid "Tizimga kirish"
+msgstr "Tizimga kirish"
+
+#: .\templates\users\login.html:10
+msgid "Username va parolni kiriting"
+msgstr "Username va parolni kiriting"
+
+#: .\templates\users\login.html:19 .\templates\users\login.html:20
+#: .\templates\users\profile.html:10 .\templates\users\register.html:19
+msgid "Username"
+msgstr ""
+
+#: .\templates\users\login.html:26 .\templates\users\login.html:27
+#: .\templates\users\register.html:26
+msgid "Parol"
+msgstr "Parol"
+
+#: .\templates\users\login.html:34
+msgid "Xatolik"
+msgstr "Xatolik"
+
+#: .\templates\users\login.html:34
+msgid "Username yoki parol noto‘g‘ri."
+msgstr "Username yoki parol noto‘g‘ri."
+
+#: .\templates\users\profile.html:5
+msgid "Profil"
+msgstr "Profil"
+
+#: .\templates\users\profile.html:8
+msgid "Foydalanuvchi ma’lumotlari"
+msgstr "Foydalanuvchi ma’lumotlari"
+
+#: .\templates\users\profile.html:12 .\templates\users\profile_edit.html:18
+msgid "Ism"
+msgstr "Ism"
+
+#: .\templates\users\profile.html:16 .\templates\users\profile_edit.html:25
+msgid "Familiya"
+msgstr "Familiya"
+
+#: .\templates\users\profile.html:20 .\templates\users\profile_edit.html:3
+#: .\templates\users\profile_edit.html:8
+msgid "Profilni tahrirlash"
+msgstr "Profilni tahrirlash"
+
+#: .\templates\users\profile.html:24
+msgid "Umumiy hisobot"
+msgstr "Umumiy hisobot"
+
+#: .\templates\users\profile.html:29 .\templates\users\profile.html:36
+msgid "Umumiy kirim"
+msgstr "Umumiy kirim"
+
+#: .\templates\users\profile.html:30 .\templates\users\profile.html:37
+msgid "Umumiy chiqim"
+msgstr "Umumiy chiqim"
+
+#: .\templates\users\profile.html:31 .\templates\users\profile.html:38
+#: .\templates\users\profile.html:48
+msgid "Balans"
+msgstr "Balans"
+
+#: .\templates\users\profile.html:46
+msgid "Turi"
+msgstr ""
+
+#: .\templates\users\profile.html:47
+msgid "Valyuta"
+msgstr ""
+
+#: .\templates\users\profile.html:71
+msgid "Hisob yo‘q"
+msgstr "Hisob yo‘q"
+
+#: .\templates\users\profile_edit.html:9
+msgid "Email / Ism / Familiyani o‘zgartiring"
+msgstr "Email / Ism / Familiyani o‘zgartiring"
+
+#: .\templates\users\profile_edit.html:32
+msgid "Email"
+msgstr ""
+
+#: .\templates\users\profile_edit.html:38
+msgid "Saqlash"
+msgstr "Saqlash"
+
+#: .\templates\users\profile_edit.html:39
+msgid "Bekor qilish"
+msgstr "Bekor qilish"
+
+#: .\templates\users\register.html:10
+msgid "Yangi foydalanuvchi yaratish"
+msgstr "Yangi foydalanuvchi yaratish"
+
+#: .\templates\users\register.html:33
+msgid "Parolni takrorlash"
+msgstr "Parolni takrorlash"
+
+#~ msgid "Login yoki parol xato"
+#~ msgstr "Login yoki parol xato"
+
+#~ msgid "Profil yangilandi ✅"
+#~ msgstr "Profil yangilandi ✅"

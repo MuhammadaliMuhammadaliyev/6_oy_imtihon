@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+
+<h2>👤 {% trans "Profil" %}: {{ user.username }}</h2>
+
+<div style="margin:10px 0; padding:10px; border:1px solid #ddd;">
+  <h3 style="margin-top:0;">🧾 {% trans "Foydalanuvchi ma’lumotlari" %}</h3>
+
+  <p><b>{% trans "Username" %}:</b> {{ user.username }}</p>
+
+  <p><b>{% trans "Ism" %}:</b>
+    {% if user.first_name %}{{ user.first_name }}{% else %}-{% endif %}
+  </p>
+
+  <p><b>{% trans "Familiya" %}:</b>
+    {% if user.last_name %}{{ user.last_name }}{% else %}-{% endif %}
+  </p>
+
+  <a href="{% url 'users:profile_edit' %}">✏️ {% trans "Profilni tahrirlash" %}</a>
+</div>
+
+<div style="margin:10px 0; padding:10px; border:1px solid #ddd;">
+  <h3 style="margin-top:0;">📊 {% trans "Umumiy hisobot" %}</h3>
+
+  <div style="display:flex; gap:16px; flex-wrap:wrap;">
+    <div style="flex:1; min-width:260px; padding:10px; border:1px solid #eee; background:#fafafa;">
+      <h4 style="margin:0 0 8px 0;">USD</h4>
+      <p><b>{% trans "Umumiy kirim" %}:</b> {{ totals.income_usd }}</p>
+      <p><b>{% trans "Umumiy chiqim" %}:</b> {{ totals.expense_usd }}</p>
+      <p><b>{% trans "Balans" %}:</b> {{ totals.balance_usd }}</p>
+    </div>
+
+    <div style="flex:1; min-width:260px; padding:10px; border:1px solid #eee; background:#fafafa;">
+      <h4 style="margin:0 0 8px 0;">UZS</h4>
+      <p><b>{% trans "Umumiy kirim" %}:</b> {{ totals.income_uzs }}</p>
+      <p><b>{% trans "Umumiy chiqim" %}:</b> {{ totals.expense_uzs }}</p>
+      <p><b>{% trans "Balans" %}:</b> {{ totals.balance_uzs }}</p>
+    </div>
+  </div>
+</div>
+
+<h3>{% trans "Hisoblar" %}</h3>
+<table border="1" cellpadding="8">
+  <tr>
+    <th>{% trans "Turi" %}</th>
+    <th>{% trans "Valyuta" %}</th>
+    <th>{% trans "Balans" %}</th>
+  </tr>
+
+  {% for a in accounts %}
+  <tr>
+    <td>{{ a.get_type_display }}</td>
+
+    <td>
+      {% if a.currency %}
+        {{ a.get_currency_display }}
+      {% else %}
+        -
+      {% endif %}
+    </td>
+
+    <td>
+      {{ a.calculated_balance }}
+      <span class="badge" style="margin-left:6px;">
+        {{ a.currency }}
+      </span>
+    </td>
+  </tr>
+  {% empty %}
+  <tr><td colspan="3">{% trans "Hisob yo‘q" %}</td></tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

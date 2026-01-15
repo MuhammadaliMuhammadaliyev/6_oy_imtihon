@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Profilni tahrirlash" %}{% endblock %}
+
+{% block content %}
+<div class="grid">
+  <div class="card half">
+    <div class="h1">{% trans "Profilni tahrirlash" %}</div>
+    <div class="muted">{% trans "Email / Ism / Familiyani o‘zgartiring" %}</div>
+
+    <div class="hr"></div>
+
+    <form method="post" class="form-grid">
+      {% csrf_token %}
+
+      <div class="col-12">
+        <div class="field">
+          <label>{% trans "Ism" %}</label>
+          {{ form.first_name }}
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="field">
+          <label>{% trans "Familiya" %}</label>
+          {{ form.last_name }}
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="field">
+          <label>{% trans "Email" %}</label>
+          {{ form.email }}
+        </div>
+      </div>
+
+      <div class="col-12 row">
+        <button class="btn success" type="submit">{% trans "Saqlash" %}</button>
+        <a class="btn ghost" href="{% url 'users:profile' %}">{% trans "Bekor qilish" %}</a>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% endblock %}

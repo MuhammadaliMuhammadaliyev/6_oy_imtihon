@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Hisob form" %}{% endblock %}
+
+{% block content %}
+<div class="grid">
+  <div class="card half">
+    <div class="h1">{% trans "Hisob qo‘shish / tahrirlash" %}</div>
+    <div class="muted">{% trans "Naqd yoki karta hisobini kiriting" %}</div>
+
+    <div class="hr"></div>
+
+    <form method="post" class="form-grid">
+      {% csrf_token %}
+
+      <div class="col-12">
+        <div class="field">
+          <label>{% trans "Hisob turi" %}</label>
+          {{ form.type }}
+        </div>
+      </div>
+
+      <div class="col-12" id="currencyWrap">
+        <div class="field">
+          <label>{% trans "Pul birligi" %}</label>
+          {{ form.currency }}
+        </div>
+      </div>
+
+      <div class="col-12" id="cardWrap">
+        <div class="field">
+          <label>{% trans "Karta turi" %}</label>
+          {{ form.card_kind }}
+        </div>
+
+        <div class="field">
+          <label>{% trans "Bank nomi" %}</label>
+          {{ form.bank_name }}
+        </div>
+
+        <div class="field">
+          <label>{% trans "Kartaning oxirgi 4 raqami" %}</label>
+          {{ form.last4 }}
+        </div>
+      </div>
+
+      <div class="col-12 row">
+        <button class="btn success" type="submit">{% trans "Saqlash" %}</button>
+        <a class="btn ghost" href="{% url 'finance:account_list' %}">{% trans "Bekor qilish" %}</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  const typeEl = document.getElementById("id_type");
+  const currencyWrap = document.getElementById("currencyWrap");
+  const cardWrap = document.getElementById("cardWrap");
+
+  function toggleFields(){
+    const t = typeEl?.value;
+
+    if(t === "CARD"){
+      cardWrap.style.display = "block";
+      currencyWrap.style.display = "block";
+    } else if(t === "CASH" || t === "CURR"){
+      currencyWrap.style.display = "block";
+      cardWrap.style.display = "none";
+    } else {
+      currencyWrap.style.display = "none";
+      cardWrap.style.display = "none";
+    }
+  }
+
+  if(typeEl){
+    typeEl.addEventListener("change", toggleFields);
+    toggleFields();
+  }
+</script>
+{% endblock %}

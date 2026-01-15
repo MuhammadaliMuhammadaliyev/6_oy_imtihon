@@ -1,0 +1,56 @@
+{% load static %}
+{% load i18n %}
+<!doctype html>
+<html lang="{{ request.LANGUAGE_CODE|default:'uz' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}{% trans "Kirim-Chiqim" %}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+<div class="container">
+  <div class="nav">
+    <div class="left">
+      <div class="brand">💸 {% trans "Kirim-Chiqim" %}</div>
+      <a class="btn ghost" href="{% url 'finance:dashboard' %}">{% trans "Dashboard" %}</a>
+      <a class="btn ghost" href="{% url 'finance:account_list' %}">{% trans "Hisoblar" %}</a>
+      <a class="btn ghost" href="{% url 'finance:category_list' %}">{% trans "Kategoriyalar" %}</a>
+      <a class="btn ghost" href="{% url 'finance:monthly_report' %}">{% trans "Oylik hisobot" %}</a>
+    </div>
+
+    <div class="right">
+      {# 🌐 Til tanlash (Django set_language) #}
+      <form class="lang-form" action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ request.get_full_path }}">
+        <select name="language" onchange="this.form.submit()">
+          {% get_current_language as LANGUAGE_CODE %}
+          {% get_available_languages as LANGUAGES %}
+          {% for lang in LANGUAGES %}
+            <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
+              {{ lang.1 }}
+            </option>
+          {% endfor %}
+        </select>
+      </form>
+
+      {% if user.is_authenticated %}
+        <a class="badge" href="{% url 'users:profile' %}">👤 {{ user.username }}</a>
+
+        <form method="post" action="{% url 'users:logout' %}">
+          {% csrf_token %}
+          <button class="btn danger" type="submit">{% trans "Chiqish" %}</button>
+        </form>
+      {% else %}
+        <a class="btn primary" href="{% url 'users:login' %}">{% trans "Kirish" %}</a>
+        <a class="btn" href="{% url 'users:register' %}">{% trans "Ro‘yxatdan o‘tish" %}</a>
+      {% endif %}
+    </div>
+  </div>
+
+  {% block content %}{% endblock %}
+</div>
+</body>
+</html>

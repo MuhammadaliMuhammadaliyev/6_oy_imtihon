@@ -1,0 +1,303 @@
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-15 17:40+0500\n"
+"Language: en\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "Hisob form"
+msgstr "Account form"
+
+msgid "Hisob qo‘shish / tahrirlash"
+msgstr "Add / edit account"
+
+msgid "Naqd yoki karta hisobini kiriting"
+msgstr "Enter a cash or card account"
+
+msgid "Hisob turi"
+msgstr "Account type"
+
+msgid "Pul birligi"
+msgstr "Currency"
+
+msgid "Karta turi"
+msgstr "Card type"
+
+msgid "Bank nomi"
+msgstr "Bank name"
+
+msgid "Kartaning oxirgi 4 raqami"
+msgstr "Last 4 digits of the card"
+
+msgid "Saqlash"
+msgstr "Save"
+
+msgid "Bekor qilish"
+msgstr "Cancel"
+
+msgid "Hisoblar"
+msgstr "Accounts"
+
+msgid "Naqd va karta hisoblarini boshqarish"
+msgstr "Manage cash and card accounts"
+
+msgid "Hisob qo‘shish"
+msgstr "Add account"
+
+msgid "Hisob"
+msgstr "Account"
+
+msgid "Amal"
+msgstr "Action"
+
+msgid "Tahrirlash"
+msgstr "Edit"
+
+msgid "O‘chirish"
+msgstr "Delete"
+
+msgid "Hali hisob yo‘q."
+msgstr "No accounts yet."
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Kirim-Chiqim"
+msgstr "Income-Expense"
+
+msgid "Kategoriyalar"
+msgstr "Categories"
+
+msgid "Oylik hisobot"
+msgstr "Monthly report"
+
+msgid "Chiqish"
+msgstr "Logout"
+
+msgid "Kirish"
+msgstr "Login"
+
+msgid "Ro‘yxatdan o‘tish"
+msgstr "Register"
+
+msgid "Kirim/Chiqim kategoriyalarini boshqarish"
+msgstr "Manage income/expense categories"
+
+msgid "Kategoriya qo‘shish"
+msgstr "Add category"
+
+msgid "Nomi"
+msgstr "Name"
+
+msgid "Turi"
+msgstr "Type"
+
+msgid "Kirim"
+msgstr "Income"
+
+msgid "Chiqim"
+msgstr "Expense"
+
+msgid "Hali kategoriya yo‘q."
+msgstr "No categories yet."
+
+msgid "O‘chirishni tasdiqlash"
+msgstr "Confirm deletion"
+
+msgid "Bu amalni ortga qaytarib bo‘lmaydi"
+msgstr "This action cannot be undone"
+
+msgid "Rostdan ham ushbu ma’lumotni o‘chirmoqchimisiz?"
+msgstr "Are you sure you want to delete this item?"
+
+msgid "Ha, o‘chirish"
+msgstr "Yes, delete"
+
+msgid "Tranzaksiya qo‘shish"
+msgstr "Add transaction"
+
+msgid "Qidirish"
+msgstr "Search"
+
+msgid "Izoh yoki kategoriya..."
+msgstr "Note or category..."
+
+msgid "Boshlanish"
+msgstr "Start"
+
+msgid "Tugash"
+msgstr "End"
+
+msgid "Tartiblash (order)"
+msgstr "Sorting (order)"
+
+msgid "Sana ↓ (yangi)"
+msgstr "Date ↓ (newest)"
+
+msgid "Sana ↑ (eski)"
+msgstr "Date ↑ (oldest)"
+
+msgid "Summa ↓ (katta)"
+msgstr "Amount ↓ (largest)"
+
+msgid "Summa ↑ (kichik)"
+msgstr "Amount ↑ (smallest)"
+
+msgid "Turi (IN/EX)"
+msgstr "Type (IN/EX)"
+
+msgid "Qo‘llash"
+msgstr "Apply"
+
+msgid "Tozalash"
+msgstr "Clear"
+
+msgid "Dollar"
+msgstr "Dollar"
+
+msgid "Jami kirim"
+msgstr "Total income"
+
+msgid "Jami chiqim"
+msgstr "Total expense"
+
+msgid "Balans"
+msgstr "Balance"
+
+msgid "So'm"
+msgstr "So'm"
+
+msgid "Sana"
+msgstr "Date"
+
+msgid "Kategoriya"
+msgstr "Category"
+
+msgid "Summa"
+msgstr "Amount"
+
+msgid "Ko‘rish"
+msgstr "View"
+
+msgid "Hali tranzaksiya yo‘q."
+msgstr "No transactions yet."
+
+msgid "Hisobot"
+msgstr "Report"
+
+msgid "%(s)s dan %(e)s gacha kirim/chiqim"
+msgstr "Income/expense from %(s)s to %(e)s"
+
+msgid "%(s)s dan boshlab kirim/chiqim"
+msgstr "Income/expense starting from %(s)s"
+
+msgid "%(e)s gacha kirim/chiqim"
+msgstr "Income/expense up to %(e)s"
+
+msgid "Sana oralig‘ini tanlang"
+msgstr "Select a date range"
+
+msgid "Boshlanish sana"
+msgstr "Start date"
+
+msgid "Tugash sana"
+msgstr "End date"
+
+msgid "Ko‘rsat"
+msgstr "Show"
+
+msgid "Bu oraliqda tranzaksiya yo‘q."
+msgstr "No transactions in this range."
+
+msgid "Tranzaksiya"
+msgstr "Transaction"
+
+msgid "Batafsil ma’lumot va izohlar"
+msgstr "Details and notes"
+
+msgid "Izoh (note)"
+msgstr "Note"
+
+msgid "Izohlar"
+msgstr "Comments"
+
+msgid "%(n)s ta"
+msgstr "%(n)s"
+
+msgid "Izoh yo‘q"
+msgstr "No comments"
+
+msgid "Izoh qo‘shish"
+msgstr "Add comment"
+
+msgid "Izoh matni"
+msgstr "Comment text"
+
+msgid "Tranzaksiya form"
+msgstr "Transaction form"
+
+msgid "Tranzaksiya qo‘shish / tahrirlash"
+msgstr "Add / edit transaction"
+
+msgid "Kirim yoki chiqimni kiriting"
+msgstr "Enter income or expense"
+
+msgid "Valyuta"
+msgstr "Currency"
+
+msgid "Tizimga kirish"
+msgstr "Login to system"
+
+msgid "Username va parolni kiriting"
+msgstr "Enter username and password"
+
+msgid "Username"
+msgstr "Username"
+
+msgid "Parol"
+msgstr "Password"
+
+msgid "Xatolik"
+msgstr "Error"
+
+msgid "Username yoki parol noto‘g‘ri."
+msgstr "Incorrect username or password"
+
+msgid "Profil"
+msgstr "Profile"
+
+msgid "Foydalanuvchi ma’lumotlari"
+msgstr "User information"
+
+msgid "Ism"
+msgstr "First name"
+
+msgid "Familiya"
+msgstr "Last name"
+
+msgid "Profilni tahrirlash"
+msgstr "Edit profile"
+
+msgid "Umumiy hisobot"
+msgstr "Summary report"
+
+msgid "Umumiy kirim"
+msgstr "Total income"
+
+msgid "Umumiy chiqim"
+msgstr "Total expense"
+
+msgid "Hisob yo‘q"
+msgstr "No accounts"
+
+msgid "Email / Ism / Familiyani o‘zgartiring"
+msgstr "Change Email / First name / Last name"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Yangi foydalanuvchi yaratish"
+msgstr "Create new user"
+
+msgid "Parolni takrorlash"
+msgstr "Repeat password"

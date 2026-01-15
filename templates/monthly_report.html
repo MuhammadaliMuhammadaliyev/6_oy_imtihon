@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Hisobot" %}{% endblock %}
+
+{% block content %}
+<div class="grid">
+
+  <div class="card">
+    <div class="row" style="justify-content:space-between">
+      <div>
+        <div class="h1">{% trans "Hisobot" %}</div>
+        <div class="muted">
+          {% if start and end %}
+            {% blocktrans with s=start e=end %}{{ s }} dan {{ e }} gacha kirim/chiqim{% endblocktrans %}
+          {% elif start %}
+            {% blocktrans with s=start %}{{ s }} dan boshlab kirim/chiqim{% endblocktrans %}
+          {% elif end %}
+            {% blocktrans with e=end %}{{ e }} gacha kirim/chiqim{% endblocktrans %}
+          {% else %}
+            {% trans "Sana oralig‘ini tanlang" %}
+          {% endif %}
+        </div>
+      </div>
+      <a class="btn ghost" href="{% url 'finance:dashboard' %}">← {% trans "Dashboard" %}</a>
+    </div>
+
+    <div class="hr"></div>
+
+    <form method="get" class="form-grid">
+      <div class="col-4">
+        <div class="field">
+          <label>{% trans "Boshlanish sana" %}</label>
+          <input type="date" name="start" value="{{ start }}">
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="field">
+          <label>{% trans "Tugash sana" %}</label>
+          <input type="date" name="end" value="{{ end }}">
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="field" style="align-self:end">
+          <button class="btn primary" type="submit">{% trans "Ko‘rsat" %}</button>
+          <a class="btn ghost" href="{% url 'finance:monthly_report' %}">{% trans "Tozalash" %}</a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="card">
+    <div class="row" style="justify-content:flex-end">
+      <div class="kpi in" style="min-width:180px">
+        <div class="label">{% trans "Jami kirim" %}</div>
+        <div class="value">{{ income }}</div>
+      </div>
+
+      <div class="kpi ex" style="min-width:180px">
+        <div class="label">{% trans "Jami chiqim" %}</div>
+        <div class="value">{{ expense }}</div>
+      </div>
+
+      <div class="kpi bal" style="min-width:180px">
+        <div class="label">{% trans "Balans" %}</div>
+        <div class="value">{{ balance }}</div>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="table-wrap">
+      <table>
+        <tr>
+          <th>{% trans "Sana" %}</th>
+          <th>{% trans "Turi" %}</th>
+          <th>{% trans "Kategoriya" %}</th>
+          <th>{% trans "Hisob" %}</th>
+          <th>{% trans "Summa" %}</th>
+        </tr>
+
+        {% for t in transactions %}
+        <tr>
+          <td>{{ t.date }}</td>
+          <td>
+            {% if t.type == "IN" %}
+              <span class="badge in">{% trans "Kirim" %}</span>
+            {% else %}
+              <span class="badge ex">{% trans "Chiqim" %}</span>
+            {% endif %}
+          </td>
+          <td>{{ t.category }}</td>
+          <td>{{ t.account }}</td>
+          <td>{{ t.amount }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5" class="muted">{% trans "Bu oraliqda tranzaksiya yo‘q." %}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

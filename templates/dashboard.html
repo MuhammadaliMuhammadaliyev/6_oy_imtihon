@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Dashboard" %}{% endblock %}
+
+{% block content %}
+<div class="grid">
+
+  <div class="card">
+    <div class="row" style="justify-content:space-between">
+      <div>
+        <div class="h1">{% trans "Dashboard" %}</div>
+      </div>
+
+      <a class="btn primary" href="{% url 'finance:transaction_create' %}">
+        + {% trans "Tranzaksiya qo‘shish" %}
+      </a>
+    </div>
+
+    <div class="hr"></div>
+
+    <form method="get" class="form-grid">
+      <div class="col-4">
+        <div class="field">
+          <label>{% trans "Qidirish" %}</label>
+          <input type="text" name="q" value="{{ q }}" placeholder="{% trans 'Izoh yoki kategoriya...' %}">
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="field">
+          <label>{% trans "Boshlanish" %}</label>
+          <input type="date" name="start" value="{{ start }}">
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="field">
+          <label>{% trans "Tugash" %}</label>
+          <input type="date" name="end" value="{{ end }}">
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="field">
+          <label>{% trans "Tartiblash (order)" %}</label>
+          <select name="order">
+            <option value="-date" {% if order == "-date" %}selected{% endif %}>{% trans "Sana ↓ (yangi)" %}</option>
+            <option value="date" {% if order == "date" %}selected{% endif %}>{% trans "Sana ↑ (eski)" %}</option>
+            <option value="-amount" {% if order == "-amount" %}selected{% endif %}>{% trans "Summa ↓ (katta)" %}</option>
+            <option value="amount" {% if order == "amount" %}selected{% endif %}>{% trans "Summa ↑ (kichik)" %}</option>
+            <option value="type" {% if order == "type" %}selected{% endif %}>{% trans "Turi (IN/EX)" %}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="row" style="justify-content:flex-end; height:100%; align-items:flex-end">
+          <button class="btn" type="submit">{% trans "Qo‘llash" %}</button>
+          <a class="btn ghost" href="{% url 'finance:dashboard' %}">{% trans "Tozalash" %}</a>
+          <a class="btn ghost" href="{% url 'finance:monthly_report' %}">{% trans "Oylik hisobot" %}</a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="card">
+    <div class="row" style="justify-content:flex-end; gap:14px; flex-wrap:wrap;">
+
+      <div class="card" style="padding:14px; min-width:320px;">
+        <div class="row" style="justify-content:space-between;">
+          <div class="h1" style="font-size:16px; margin:0;">USD</div>
+          <span class="badge">{% trans "Dollar" %}</span>
+        </div>
+        <div class="hr"></div>
+        <div class="row" style="justify-content:flex-end">
+          <div class="kpi in" style="min-width:180px">
+            <div class="label">{% trans "Jami kirim" %}</div>
+            <div class="value">{{ income_usd }}</div>
+          </div>
+          <div class="kpi ex" style="min-width:180px">
+            <div class="label">{% trans "Jami chiqim" %}</div>
+            <div class="value">{{ expense_usd }}</div>
+          </div>
+          <div class="kpi bal" style="min-width:180px">
+            <div class="label">{% trans "Balans" %}</div>
+            <div class="value">{{ balance_usd }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="padding:14px; min-width:320px;">
+        <div class="row" style="justify-content:space-between;">
+          <div class="h1" style="font-size:16px; margin:0;">UZS</div>
+          <span class="badge">{% trans "So'm" %}</span>
+        </div>
+        <div class="hr"></div>
+        <div class="row" style="justify-content:flex-end">
+          <div class="kpi in" style="min-width:180px">
+            <div class="label">{% trans "Jami kirim" %}</div>
+            <div class="value">{{ income_uzs }}</div>
+          </div>
+          <div class="kpi ex" style="min-width:180px">
+            <div class="label">{% trans "Jami chiqim" %}</div>
+            <div class="value">{{ expense_uzs }}</div>
+          </div>
+          <div class="kpi bal" style="min-width:180px">
+            <div class="label">{% trans "Balans" %}</div>
+            <div class="value">{{ balance_uzs }}</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="table-wrap">
+      <table>
+        <tr>
+          <th>{% trans "Sana" %}</th>
+          <th>{% trans "Turi" %}</th>
+          <th>{% trans "Kategoriya" %}</th>
+          <th>{% trans "Hisob" %}</th>
+          <th>{% trans "Summa" %}</th>
+          <th>{% trans "Amal" %}</th>
+        </tr>
+
+        {% for t in transactions %}
+        <tr>
+          <td>{{ t.date }}</td>
+          <td>
+            {% if t.type == "IN" %}
+              <span class="badge in">{% trans "Kirim" %}</span>
+            {% else %}
+              <span class="badge ex">{% trans "Chiqim" %}</span>
+            {% endif %}
+          </td>
+          <td>{{ t.category }}</td>
+          <td>{{ t.account }}</td>
+          <td>
+            {{ t.amount }}
+            <span class="badge" style="margin-left:6px;">
+              {{ t.account.currency }}
+            </span>
+          </td>
+
+          <td class="row">
+            <a class="btn" href="{% url 'finance:transaction_detail' t.id %}">{% trans "Ko‘rish" %}</a>
+            <a class="btn" href="{% url 'finance:transaction_update' t.id %}">{% trans "Tahrirlash" %}</a>
+
+            <form method="post" action="{% url 'finance:transaction_delete' t.id %}">
+              {% csrf_token %}
+              <button class="btn danger" type="submit">{% trans "O‘chirish" %}</button>
+            </form>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="6" class="muted">{% trans "Hali tranzaksiya yo‘q." %}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

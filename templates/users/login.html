@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Kirish" %}{% endblock %}
+
+{% block content %}
+<div class="grid">
+
+  <div class="card half">
+    <div class="h1">{% trans "Tizimga kirish" %}</div>
+    <div class="muted">{% trans "Username va parolni kiriting" %}</div>
+
+    <div class="hr"></div>
+
+    <form method="post" class="form-grid">
+      {% csrf_token %}
+
+      <div class="col-12">
+        <div class="field">
+          <label>{% trans "Username" %}</label>
+          <input name="username" value="{{ request.POST.username }}" placeholder="{% trans 'Username' %}">
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="field">
+          <label>{% trans "Parol" %}</label>
+          <input name="password" type="password" placeholder="{% trans 'Parol' %}">
+        </div>
+      </div>
+
+      {% if form.errors %}
+        <div class="col-12">
+          <div class="flash">
+            <b>{% trans "Xatolik" %}:</b> {% trans "Username yoki parol noto‘g‘ri." %}
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="col-12 row">
+        <button class="btn primary" type="submit">{% trans "Kirish" %}</button>
+        <a class="btn" href="{% url 'users:register' %}">{% trans "Ro‘yxatdan o‘tish" %}</a>
+      </div>
+    </form>
+  </div>
+
+</div>
+{% endblock %}

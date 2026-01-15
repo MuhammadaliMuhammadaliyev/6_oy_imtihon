@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Ro‘yxatdan o‘tish" %}{% endblock %}
+
+{% block content %}
+<div class="grid">
+
+  <div class="card half">
+    <div class="h1">{% trans "Ro‘yxatdan o‘tish" %}</div>
+    <div class="muted">{% trans "Yangi foydalanuvchi yaratish" %}</div>
+
+    <div class="hr"></div>
+
+    <form method="post" class="form-grid">
+      {% csrf_token %}
+
+      <div class="col-12">
+        <div class="field">
+          <label>{% trans "Username" %}</label>
+          {{ form.username }}
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="field">
+          <label>{% trans "Parol" %}</label>
+          {{ form.password1 }}
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="field">
+          <label>{% trans "Parolni takrorlash" %}</label>
+          {{ form.password2 }}
+        </div>
+      </div>
+
+      <div class="col-12 row">
+        <button class="btn success" type="submit">{% trans "Ro‘yxatdan o‘tish" %}</button>
+        <a class="btn ghost" href="{% url 'users:login' %}">{% trans "Kirish" %}</a>
+      </div>
+    </form>
+
+  </div>
+
+</div>
+{% endblock %}
