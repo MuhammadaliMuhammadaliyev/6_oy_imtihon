@@ -5,7 +5,6 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Account(models.Model):
-    # -------- Choices (TRANSLATABLE) --------
     CASH = "CASH"
     CARD = "CARD"
     ACCOUNT_TYPES = (
@@ -31,19 +30,15 @@ class Account(models.Model):
         (MC, _("Mastercard")),
     )
 
-    # -------- Fields --------
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="accounts")
     name = models.CharField(max_length=120)
-
     type = models.CharField(max_length=4, choices=ACCOUNT_TYPES)
     currency = models.CharField(max_length=3, choices=CURRENCY, blank=True, null=True)
-
     card_kind = models.CharField(max_length=10, choices=CARD_KINDS, blank=True, null=True)
     bank_name = models.CharField(max_length=80, blank=True, null=True)
     last4 = models.CharField(max_length=4, blank=True, null=True)
 
     def __str__(self):
-        # Admin + template uchun chiroyli
         parts = [self.name or self.get_type_display()]
         if self.currency:
             parts.append(self.currency)
@@ -78,14 +73,11 @@ class Transaction(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     type = models.CharField(max_length=3, choices=TRAN_TYPES)
-
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
-
     amount = models.DecimalField(max_digits=15, decimal_places=2)
     date = models.DateField()
     note = models.CharField(max_length=200, blank=True)
-
     currency = models.CharField(max_length=3, choices=Account.CURRENCY, blank=True, null=True)
 
     class Meta:
@@ -111,14 +103,11 @@ class Transfer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     from_account = models.ForeignKey("Account", on_delete=models.CASCADE, related_name="transfers_out")
     to_account = models.ForeignKey("Account", on_delete=models.CASCADE, related_name="transfers_in")
-
     amount_from = models.DecimalField(max_digits=15, decimal_places=2)
     amount_to = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
     rate = models.DecimalField(max_digits=15, decimal_places=6, blank=True, null=True)
-
     date = models.DateField()
     note = models.CharField(max_length=200, blank=True)
-
     out_tx = models.OneToOneField(
         "Transaction", on_delete=models.SET_NULL, null=True, blank=True, related_name="transfer_out"
     )

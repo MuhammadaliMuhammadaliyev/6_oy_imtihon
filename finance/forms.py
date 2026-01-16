@@ -74,17 +74,11 @@ class TransactionForm(forms.ModelForm):
         if self.user:
             self.fields["category"].queryset = Category.objects.filter(user=self.user)
             self.fields["account"].queryset = Account.objects.filter(user=self.user)
-
-        # update bo‘lsa currency ni account’dan to‘ldiramiz
         if self.instance and self.instance.pk and self.instance.account_id:
             self.fields["currency"].initial = self.instance.account.currency
-
-        # POST bo‘lsa currency bo‘yicha accountlarni filtrlash
         cur = self.data.get("currency")
         if cur and self.user:
             self.fields["account"].queryset = Account.objects.filter(user=self.user, currency=cur)
-
-        # account label’larni chiroyli qilish
         choices = []
         for acc in self.fields["account"].queryset:
             label = f"{acc.get_type_display()} - {acc.get_currency_display()}"

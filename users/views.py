@@ -38,7 +38,6 @@ def register(request):
     return render(request, "users/register.html", {"form": form})
 
 
-# ✅ Professional SUM helper (DecimalField xatosiz)
 def _sum_amount(qs):
     return qs.aggregate(
         s=Coalesce(
@@ -50,7 +49,6 @@ def _sum_amount(qs):
 
 
 def _get_usd_rate():
-    # eng oxirgi kurs: 1 USD = rate UZS
     obj = ExchangeRate.objects.filter(base="USD", quote="UZS").order_by("-date").first()
     return obj.rate if obj else Decimal("0")
 
@@ -59,41 +57,29 @@ def _get_usd_rate():
 def profile(request):
     accounts = list(Account.objects.filter(user=request.user).order_by("-id"))
     tx = Transaction.objects.filter(user=request.user).select_related("account")
-
-    # ✅ har bir account uchun balans (ORM)
     for acc in accounts:
         inc = _sum_amount(tx.filter(type="IN", account=acc))
         exp = _sum_amount(tx.filter(type="EX", account=acc))
-        acc.calculated_balance = inc - exp  # template’da ishlatamiz
+        acc.calculated_balance = inc - exp
 
-    # ✅ USD totals (ORM)
     income_usd = _sum_amount(tx.filter(type="IN", account__currency="USD"))
     expense_usd = _sum_amount(tx.filter(type="EX", account__currency="USD"))
     balance_usd = income_usd - expense_usd
-
-    # ✅ UZS totals (ORM)
     income_uzs = _sum_amount(tx.filter(type="IN", account__currency="UZS"))
     expense_uzs = _sum_amount(tx.filter(type="EX", account__currency="UZS"))
     balance_uzs = income_uzs - expense_uzs
-
-    # ✅ TOTAL (UZS) kurs bilan
     usd_rate = _get_usd_rate()
     total_balance_uzs = balance_uzs + (balance_usd * usd_rate)
-
     totals = {
         "income_usd": income_usd,
         "expense_usd": expense_usd,
         "balance_usd": balance_usd,
-
         "income_uzs": income_uzs,
         "expense_uzs": expense_uzs,
         "balance_uzs": balance_uzs,
-
-        # TOTAL
         "usd_rate": usd_rate,
         "total_balance_uzs": total_balance_uzs,
     }
-
     return render(request, "users/profile.html", {
         "accounts": accounts,
         "totals": totals,

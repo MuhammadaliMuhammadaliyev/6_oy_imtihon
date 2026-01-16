@@ -12,7 +12,6 @@ from .forms import AccountForm, CategoryForm, TransactionForm, CommentForm, Tran
 from .services.exchange import convert
 
 
-# ========= Helpers (Professional totals) =========
 def _sum_amount(qs):
     return qs.aggregate(s=Coalesce(Sum("amount"), Decimal("0")))["s"]
 
@@ -34,42 +33,28 @@ def dashboard(request):
         transactions = transactions.filter(date__lte=end)
 
     transactions = transactions.order_by(order)
-
-    # ==== UZS hisob ====
     income_uzs = _sum_amount(transactions.filter(type="IN", account__currency="UZS"))
     expense_uzs = _sum_amount(transactions.filter(type="EX", account__currency="UZS"))
     balance_uzs = income_uzs - expense_uzs
-
-    # ==== USD hisob ====
     income_usd = _sum_amount(transactions.filter(type="IN", account__currency="USD"))
     expense_usd = _sum_amount(transactions.filter(type="EX", account__currency="USD"))
     balance_usd = income_usd - expense_usd
-
-    # ==== ✅ Umumiy balans (bitta valyutada) ====
-    # USD balansni UZS ga avtomatik konvert qilamiz
     try:
         usd_to_uzs = convert(balance_usd, "USD", "UZS")
     except Exception:
-        usd_to_uzs = 0   # agar kurs kiritilmagan bo‘lsa yiqilmasin
+        usd_to_uzs = 0
 
     total_balance_uzs = balance_uzs + usd_to_uzs
 
     return render(request, "dashboard.html", {
         "transactions": transactions,
-
-        # USD
         "income_usd": income_usd,
         "expense_usd": expense_usd,
         "balance_usd": balance_usd,
-
-        # UZS
         "income_uzs": income_uzs,
         "expense_uzs": expense_uzs,
         "balance_uzs": balance_uzs,
-
-        # ✅ Umumiy
         "total_balance_uzs": total_balance_uzs,
-
         "q": q,
         "order": order,
         "start": start,
@@ -124,7 +109,6 @@ def transaction_delete(request, pk):
 
 @login_required
 def account_list(request):
-    # ✅ SECURITY: faqat o'zingizniki
     accounts = Account.objects.filter(user=request.user).order_by('-id')
     return render(request, 'account_list.html', {'accounts': accounts})
 
@@ -199,36 +183,27 @@ def category_delete(request, pk):
 def monthly_report(request):
     start = request.GET.get("start")
     end = request.GET.get("end")
-
     qs = Transaction.objects.filter(user=request.user).select_related("account")
-
     if start:
         qs = qs.filter(date__gte=parse_date(start))
     if end:
         qs = qs.filter(date__lte=parse_date(end))
 
-    # ✅ Professional: USD/UZS alohida
     income_uzs = _sum_amount(qs.filter(type="IN", account__currency="UZS"))
     expense_uzs = _sum_amount(qs.filter(type="EX", account__currency="UZS"))
     balance_uzs = income_uzs - expense_uzs
-
     income_usd = _sum_amount(qs.filter(type="IN", account__currency="USD"))
     expense_usd = _sum_amount(qs.filter(type="EX", account__currency="USD"))
     balance_usd = income_usd - expense_usd
 
     return render(request, "monthly_report.html", {
         "transactions": qs.order_by("-date"),
-
-        # UZS
         "income_uzs": income_uzs,
         "expense_uzs": expense_uzs,
         "balance_uzs": balance_uzs,
-
-        # USD
         "income_usd": income_usd,
         "expense_usd": expense_usd,
         "balance_usd": balance_usd,
-
         "start": start,
         "end": end,
     })
@@ -272,13 +247,10 @@ def transfer_create(request):
                 date=obj.date,
                 note=(obj.note or "")[:200],
             )
-
             obj.out_tx = out_tx
             obj.in_tx = in_tx
             obj.save(update_fields=["out_tx", "in_tx"])
-
         return redirect("finance:dashboard")
-
     return render(request, "transfer_form.html", {"form": form})
 
 
@@ -286,7 +258,6 @@ def transfer_create(request):
 def analytics(request):
     year = int(request.GET.get("year", date.today().year))
     currency = request.GET.get("currency", "UZS")
-
     base = (
         Transaction.objects
         .filter(user=request.user, date__year=year, account__currency=currency)
@@ -295,7 +266,6 @@ def analytics(request):
         .annotate(total=Sum("amount"))
         .order_by("m")
     )
-
     bucket = {}
     for r in base:
         m = r["m"].strftime("%Y-%m")
@@ -305,7 +275,6 @@ def analytics(request):
     labels = sorted(bucket.keys())
     income = [bucket[m]["IN"] for m in labels]
     expense = [bucket[m]["EX"] for m in labels]
-
     cat_qs = (
         Transaction.objects
         .filter(user=request.user, type="EX", date__year=year, account__currency=currency)
@@ -313,10 +282,8 @@ def analytics(request):
         .annotate(total=Sum("amount"))
         .order_by("-total")[:10]
     )
-
     cat_labels = [x["category__name"] for x in cat_qs]
     cat_values = [float(x["total"] or 0) for x in cat_qs]
-
     return render(request, "analytics.html", {
         "year": year,
         "currency": currency,
