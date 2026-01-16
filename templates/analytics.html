@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+  <div class="row" style="justify-content:space-between;">
+    <div>
+      <div class="h1">Analitika</div>
+      <div class="muted">{{ year }} • {{ currency }}</div>
+    </div>
+
+    <form method="get" class="row">
+      <input type="number" name="year" value="{{ year }}" style="width:120px;">
+      <select name="currency" style="width:120px;">
+        <option value="UZS" {% if currency == "UZS" %}selected{% endif %}>UZS</option>
+        <option value="USD" {% if currency == "USD" %}selected{% endif %}>USD</option>
+      </select>
+      <button class="btn" type="submit">Ko‘rish</button>
+    </form>
+  </div>
+
+  <div class="hr"></div>
+
+  <canvas id="monthlyChart" height="110"></canvas>
+  <div class="hr"></div>
+  <canvas id="catChart" height="110"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const labels = {{ labels|safe }};
+  const income = {{ income|safe }};
+  const expense = {{ expense|safe }};
+
+  new Chart(document.getElementById("monthlyChart"), {
+    type: "line",
+    data: {
+      labels,
+      datasets: [
+        { label: "Kirim", data: income },
+        { label: "Chiqim", data: expense },
+      ]
+    }
+  });
+
+  const catLabels = {{ cat_labels|safe }};
+  const catValues = {{ cat_values|safe }};
+
+  new Chart(document.getElementById("catChart"), {
+    type: "bar",
+    data: {
+      labels: catLabels,
+      datasets: [{ label: "Kategoriya bo‘yicha chiqim", data: catValues }]
+    }
+  });
+</script>
+
+{% endblock %}

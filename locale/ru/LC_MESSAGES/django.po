@@ -1,303 +1,592 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-15 17:40+0500\n"
+"POT-Creation-Date: 2026-01-16 15:25+0500\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 
-msgid "Hisob form"
-msgstr "Форма счёта"
-
-msgid "Hisob qo‘shish / tahrirlash"
-msgstr "Добавить / редактировать счёт"
-
-msgid "Naqd yoki karta hisobini kiriting"
-msgstr "Введите наличный или карточный счёт"
-
+#: .\finance\forms.py:11 .\templates\account_form.html:18
+#: .\templates\transaction_form.html:46
 msgid "Hisob turi"
 msgstr "Тип счёта"
 
+#: .\finance\forms.py:12 .\templates\account_form.html:25
 msgid "Pul birligi"
 msgstr "Валюта"
 
+#: .\finance\forms.py:13 .\templates\account_form.html:32
 msgid "Karta turi"
 msgstr "Тип карты"
 
+#: .\finance\forms.py:14 .\templates\account_form.html:37
 msgid "Bank nomi"
 msgstr "Название банка"
 
+#: .\finance\forms.py:15 .\templates\account_form.html:42
 msgid "Kartaning oxirgi 4 raqami"
 msgstr "Последние 4 цифры карты"
 
-msgid "Saqlash"
-msgstr "Сохранить"
+#: .\finance\forms.py:24
+#, fuzzy
+#| msgid "Sana oralig‘ini tanlang"
+msgid "Karta pul birligini tanlang."
+msgstr "Выберите диапазон дат"
 
-msgid "Bekor qilish"
-msgstr "Отмена"
+#: .\finance\forms.py:26
+#, fuzzy
+#| msgid "Sana oralig‘ini tanlang"
+msgid "Karta turini tanlang."
+msgstr "Выберите диапазон дат"
 
-msgid "Hisoblar"
-msgstr "Счета"
+#: .\finance\forms.py:28
+#, fuzzy
+#| msgid "Bank nomi"
+msgid "Bank nomini kiriting."
+msgstr "Название банка"
 
-msgid "Naqd va karta hisoblarini boshqarish"
-msgstr "Управление наличными и карточными счетами"
+#: .\finance\forms.py:32
+msgid "Oxirgi 4 raqamni to‘g‘ri kiriting (masalan: 1234)."
+msgstr ""
 
-msgid "Hisob qo‘shish"
-msgstr "Добавить счёт"
+#: .\finance\forms.py:36
+#, fuzzy
+#| msgid "Sana oralig‘ini tanlang"
+msgid "Pul birligini tanlang."
+msgstr "Выберите диапазон дат"
 
-msgid "Hisob"
-msgstr "Счёт"
-
-msgid "Amal"
-msgstr "Действие"
-
-msgid "Tahrirlash"
-msgstr "Редактировать"
-
-msgid "O‘chirish"
-msgstr "Удалить"
-
-msgid "Hali hisob yo‘q."
-msgstr "Пока нет счетов."
-
-msgid "Dashboard"
-msgstr "Панель"
-
-msgid "Kirim-Chiqim"
-msgstr "Доход-Расход"
-
-msgid "Kategoriyalar"
-msgstr "Категории"
-
-msgid "Oylik hisobot"
-msgstr "Месячный отчёт"
-
-msgid "Chiqish"
-msgstr "Выход"
-
-msgid "Kirish"
-msgstr "Вход"
-
-msgid "Ro‘yxatdan o‘tish"
-msgstr "Регистрация"
-
-msgid "Kirim/Chiqim kategoriyalarini boshqarish"
-msgstr "Управление категориями доходов/расходов"
-
-msgid "Kategoriya qo‘shish"
-msgstr "Добавить категорию"
-
+#: .\finance\forms.py:49 .\templates\category_form.html:24
+#: .\templates\category_list.html:25
 msgid "Nomi"
 msgstr "Название"
 
+#: .\finance\forms.py:50 .\finance\forms.py:61
+#: .\templates\category_form.html:31 .\templates\category_list.html:26
+#: .\templates\dashboard.html:143 .\templates\monthly_report.html:111
+#: .\templates\transaction_form.html:25 .\templates\users\profile.html:141
 msgid "Turi"
 msgstr "Тип"
 
-msgid "Kirim"
-msgstr "Доход"
-
-msgid "Chiqim"
-msgstr "Расход"
-
-msgid "Hali kategoriya yo‘q."
-msgstr "Пока нет категорий."
-
-msgid "O‘chirishni tasdiqlash"
-msgstr "Подтверждение удаления"
-
-msgid "Bu amalni ortga qaytarib bo‘lmaydi"
-msgstr "Это действие нельзя отменить"
-
-msgid "Rostdan ham ushbu ma’lumotni o‘chirmoqchimisiz?"
-msgstr "Вы действительно хотите удалить эти данные?"
-
-msgid "Ha, o‘chirish"
-msgstr "Да, удалить"
-
-msgid "Tranzaksiya qo‘shish"
-msgstr "Добавить транзакцию"
-
-msgid "Qidirish"
-msgstr "Поиск"
-
-msgid "Izoh yoki kategoriya..."
-msgstr "Комментарий или категория..."
-
-msgid "Boshlanish"
-msgstr "Начало"
-
-msgid "Tugash"
-msgstr "Конец"
-
-msgid "Tartiblash (order)"
-msgstr "Сортировка (order)"
-
-msgid "Sana ↓ (yangi)"
-msgstr "Дата ↓ (новые)"
-
-msgid "Sana ↑ (eski)"
-msgstr "Дата ↑ (старые)"
-
-msgid "Summa ↓ (katta)"
-msgstr "Сумма ↓ (больше)"
-
-msgid "Summa ↑ (kichik)"
-msgstr "Сумма ↑ (меньше)"
-
-msgid "Turi (IN/EX)"
-msgstr "Тип (IN/EX)"
-
-msgid "Qo‘llash"
-msgstr "Применить"
-
-msgid "Tozalash"
-msgstr "Очистить"
-
-msgid "Dollar"
-msgstr "Доллар"
-
-msgid "Jami kirim"
-msgstr "Всего доход"
-
-msgid "Jami chiqim"
-msgstr "Всего расход"
-
-msgid "Balans"
-msgstr "Баланс"
-
-msgid "So'm"
-msgstr "Сум"
-
-msgid "Sana"
-msgstr "Дата"
-
-msgid "Kategoriya"
-msgstr "Категория"
-
-msgid "Summa"
-msgstr "Сумма"
-
-msgid "Ko‘rish"
-msgstr "Просмотр"
-
-msgid "Hali tranzaksiya yo‘q."
-msgstr "Пока нет транзакций."
-
-msgid "Hisobot"
-msgstr "Отчёт"
-
-msgid "%(s)s dan %(e)s gacha kirim/chiqim"
-msgstr "Доход/расход с %(s)s по %(e)s"
-
-msgid "%(s)s dan boshlab kirim/chiqim"
-msgstr "Доход/расход начиная с %(s)s"
-
-msgid "%(e)s gacha kirim/chiqim"
-msgstr "Доход/расход до %(e)s"
-
-msgid "Sana oralig‘ini tanlang"
-msgstr "Выберите диапазон дат"
-
-msgid "Boshlanish sana"
-msgstr "Дата начала"
-
-msgid "Tugash sana"
-msgstr "Дата окончания"
-
-msgid "Ko‘rsat"
-msgstr "Показать"
-
-msgid "Bu oraliqda tranzaksiya yo‘q."
-msgstr "В этом диапазоне транзакций нет."
-
-msgid "Tranzaksiya"
-msgstr "Транзакция"
-
-msgid "Batafsil ma’lumot va izohlar"
-msgstr "Подробная информация и комментарии"
-
-msgid "Izoh (note)"
-msgstr "Комментарий (note)"
-
-msgid "Izohlar"
-msgstr "Комментарии"
-
-msgid "%(n)s ta"
-msgstr "%(n)s шт."
-
-msgid "Izoh yo‘q"
-msgstr "Комментариев нет"
-
-msgid "Izoh qo‘shish"
-msgstr "Добавить комментарий"
-
-msgid "Izoh matni"
-msgstr "Текст комментария"
-
-msgid "Tranzaksiya form"
-msgstr "Форма транзакции"
-
-msgid "Tranzaksiya qo‘shish / tahrirlash"
-msgstr "Добавить / редактировать транзакцию"
-
-msgid "Kirim yoki chiqimni kiriting"
-msgstr "Введите доход или расход"
-
+#: .\finance\forms.py:55 .\templates\transaction_form.html:39
+#: .\templates\users\profile.html:142
 msgid "Valyuta"
 msgstr "Валюта"
 
+#: .\finance\forms.py:62 .\templates\dashboard.html:144
+#: .\templates\monthly_report.html:112 .\templates\transaction_form.html:32
+msgid "Kategoriya"
+msgstr "Категория"
+
+#: .\finance\forms.py:63 .\templates\account_list.html:22
+#: .\templates\dashboard.html:145 .\templates\monthly_report.html:113
+msgid "Hisob"
+msgstr "Счёт"
+
+#: .\finance\forms.py:64 .\templates\dashboard.html:146
+#: .\templates\monthly_report.html:114 .\templates\transaction_detail.html:41
+#: .\templates\transaction_form.html:53
+msgid "Summa"
+msgstr "Сумма"
+
+#: .\finance\forms.py:65 .\finance\forms.py:125 .\templates\dashboard.html:142
+#: .\templates\monthly_report.html:110 .\templates\transaction_form.html:63
+msgid "Sana"
+msgstr "Дата"
+
+#: .\finance\forms.py:66 .\finance\forms.py:126
+#: .\templates\transaction_detail.html:48 .\templates\transaction_form.html:70
+msgid "Izoh (note)"
+msgstr "Комментарий (note)"
+
+#: .\finance\forms.py:100
+msgid "Bu hisob sizga tegishli emas."
+msgstr ""
+
+#: .\finance\forms.py:104
+msgid "Tanlangan hisob valyutasi currency bilan mos emas."
+msgstr ""
+
+#: .\finance\forms.py:112 .\templates\transaction_detail.html:83
+msgid "Izoh matni"
+msgstr "Текст комментария"
+
+#: .\finance\forms.py:120
+msgid "Qayerdan"
+msgstr ""
+
+#: .\finance\forms.py:121
+msgid "Qayerga"
+msgstr ""
+
+#: .\finance\forms.py:122
+msgid "Yuborilgan summa"
+msgstr ""
+
+#: .\finance\forms.py:123
+msgid "Qabul qilingan summa"
+msgstr ""
+
+#: .\finance\forms.py:124
+msgid "Kurs"
+msgstr ""
+
+#: .\finance\forms.py:143
+#, fuzzy
+#| msgid "Bu amalni ortga qaytarib bo‘lmaydi"
+msgid "Bir xil hisob tanlab bo‘lmaydi."
+msgstr "Это действие нельзя отменить"
+
+#: .\finance\models.py:12
+msgid "Naqd pul"
+msgstr ""
+
+#: .\finance\models.py:13
+#, fuzzy
+#| msgid "Karta turi"
+msgid "Karta"
+msgstr "Тип карты"
+
+#: .\finance\models.py:19 .\templates\dashboard.html:97
+#: .\templates\monthly_report.html:61 .\templates\users\profile.html:75
+msgid "So'm"
+msgstr "Сум"
+
+#: .\finance\models.py:20 .\templates\dashboard.html:74
+#: .\templates\monthly_report.html:84 .\templates\users\profile.html:49
+msgid "Dollar"
+msgstr "Доллар"
+
+#: .\finance\models.py:28
+msgid "Uzcard"
+msgstr ""
+
+#: .\finance\models.py:29
+msgid "Humo"
+msgstr ""
+
+#: .\finance\models.py:30
+msgid "Visa"
+msgstr ""
+
+#: .\finance\models.py:31
+msgid "Mastercard"
+msgstr ""
+
+#: .\finance\models.py:59 .\finance\models.py:75
+#: .\templates\category_list.html:35 .\templates\dashboard.html:79
+#: .\templates\dashboard.html:102 .\templates\dashboard.html:155
+#: .\templates\monthly_report.html:122 .\templates\transaction_detail.html:29
+msgid "Kirim"
+msgstr "Доход"
+
+#: .\finance\models.py:60 .\finance\models.py:76
+#: .\templates\category_list.html:37 .\templates\dashboard.html:83
+#: .\templates\dashboard.html:106 .\templates\dashboard.html:157
+#: .\templates\monthly_report.html:124 .\templates\transaction_detail.html:31
+msgid "Chiqim"
+msgstr "Расход"
+
+#: .\finance\models.py:131
+#, fuzzy
+#| msgid "Bu amalni ortga qaytarib bo‘lmaydi"
+msgid "Bir xil hisobga transfer qilib bo‘lmaydi."
+msgstr "Это действие нельзя отменить"
+
+#: .\finance\models.py:134
+msgid "Hisoblar sizga tegishli bo‘lishi shart."
+msgstr ""
+
+#: .\finance\models.py:141
+msgid "Valyuta har xil bo‘lsa amount_to (qabul qilingan summa) kiriting."
+msgstr ""
+
+#: .\templates\account_form.html:3
+msgid "Hisob form"
+msgstr "Форма счёта"
+
+#: .\templates\account_form.html:8
+msgid "Hisob qo‘shish / tahrirlash"
+msgstr "Добавить / редактировать счёт"
+
+#: .\templates\account_form.html:9
+msgid "Naqd yoki karta hisobini kiriting"
+msgstr "Введите наличный или карточный счёт"
+
+#: .\templates\account_form.html:48 .\templates\category_form.html:37
+#: .\templates\transaction_form.html:76 .\templates\users\profile_edit.html:38
+msgid "Saqlash"
+msgstr "Сохранить"
+
+#: .\templates\account_form.html:49 .\templates\category_form.html:38
+#: .\templates\confirm_delete.html:19 .\templates\transaction_form.html:77
+#: .\templates\users\profile_edit.html:39
+msgid "Bekor qilish"
+msgstr "Отмена"
+
+#: .\templates\account_list.html:3 .\templates\account_list.html:10
+#: .\templates\base.html:18 .\templates\users\profile.html:127
+#: .\templates\users\profile.html:132
+msgid "Hisoblar"
+msgstr "Счета"
+
+#: .\templates\account_list.html:11
+msgid "Naqd va karta hisoblarini boshqarish"
+msgstr "Управление наличными и карточными счетами"
+
+#: .\templates\account_list.html:14
+msgid "Hisob qo‘shish"
+msgstr "Добавить счёт"
+
+#: .\templates\account_list.html:23 .\templates\category_list.html:27
+#: .\templates\dashboard.html:147
+msgid "Amal"
+msgstr "Действие"
+
+#: .\templates\account_list.html:40 .\templates\category_list.html:41
+#: .\templates\dashboard.html:168 .\templates\transaction_detail.html:17
+msgid "Tahrirlash"
+msgstr "Редактировать"
+
+#: .\templates\account_list.html:44 .\templates\category_list.html:45
+#: .\templates\dashboard.html:171 .\templates\transaction_detail.html:20
+msgid "O‘chirish"
+msgstr "Удалить"
+
+#: .\templates\account_list.html:50
+msgid "Hali hisob yo‘q."
+msgstr "Пока нет счетов."
+
+#: .\templates\account_list.html:57 .\templates\base.html:17
+#: .\templates\category_list.html:58 .\templates\dashboard.html:3
+#: .\templates\dashboard.html:12 .\templates\monthly_report.html:24
+#: .\templates\transaction_detail.html:16 .\templates\transaction_form.html:15
+msgid "Boshqaruv paneli"
+msgstr "Панель управления"
+
+#: .\templates\admin\finance\exchangerate\change_list.html:9
+msgid "CBU’dan yangilash (USD→UZS)"
+msgstr ""
+
+#: .\templates\base.html:8 .\templates\base.html:16
+msgid "Kirim-Chiqim"
+msgstr "Доход-Расход"
+
+#: .\templates\base.html:19 .\templates\category_form.html:3
+#: .\templates\category_form.html:13 .\templates\category_list.html:3
+#: .\templates\category_list.html:11
+msgid "Kategoriyalar"
+msgstr "Категории"
+
+#: .\templates\base.html:20 .\templates\dashboard.html:60
+msgid "Oylik hisobot"
+msgstr "Месячный отчёт"
+
+#: .\templates\base.html:44
+msgid "Chiqish"
+msgstr "Выход"
+
+#: .\templates\base.html:47 .\templates\users\login.html:3
+#: .\templates\users\login.html:40 .\templates\users\register.html:40
+msgid "Kirish"
+msgstr "Вход"
+
+#: .\templates\base.html:48 .\templates\users\login.html:41
+#: .\templates\users\register.html:3 .\templates\users\register.html:9
+#: .\templates\users\register.html:39
+msgid "Ro‘yxatdan o‘tish"
+msgstr "Регистрация"
+
+#: .\templates\category_form.html:10
+msgid "Kategoriya qo‘shish / tahrirlash"
+msgstr "Добавить / редактировать категорию"
+
+#: .\templates\category_form.html:11
+msgid "Kirim yoki chiqim kategoriyasini kiriting"
+msgstr "Введите категорию дохода или расхода"
+
+#: .\templates\category_list.html:12
+msgid "Kirim/Chiqim kategoriyalarini boshqarish"
+msgstr "Управление категориями доходов/расходов"
+
+#: .\templates\category_list.html:16
+msgid "Kategoriya qo‘shish"
+msgstr "Добавить категорию"
+
+#: .\templates\category_list.html:51
+msgid "Hali kategoriya yo‘q."
+msgstr "Пока нет категорий."
+
+#: .\templates\confirm_delete.html:3 .\templates\confirm_delete.html:9
+msgid "O‘chirishni tasdiqlash"
+msgstr "Подтверждение удаления"
+
+#: .\templates\confirm_delete.html:10
+msgid "Bu amalni ortga qaytarib bo‘lmaydi"
+msgstr "Это действие нельзя отменить"
+
+#: .\templates\confirm_delete.html:14
+msgid "Rostdan ham ushbu ma’lumotni o‘chirmoqchimisiz?"
+msgstr "Вы действительно хотите удалить эти данные?"
+
+#: .\templates\confirm_delete.html:18
+msgid "Ha, o‘chirish"
+msgstr "Да, удалить"
+
+#: .\templates\dashboard.html:16
+msgid "Tranzaksiya qo‘shish"
+msgstr "Добавить транзакцию"
+
+#: .\templates\dashboard.html:25
+msgid "Qidirish"
+msgstr "Поиск"
+
+#: .\templates\dashboard.html:26
+msgid "Izoh yoki kategoriya..."
+msgstr "Комментарий или категория..."
+
+#: .\templates\dashboard.html:32
+msgid "Boshlanish"
+msgstr "Начало"
+
+#: .\templates\dashboard.html:39
+msgid "Tugash"
+msgstr "Конец"
+
+#: .\templates\dashboard.html:46
+msgid "Tartiblash"
+msgstr "Сортировка"
+
+#: .\templates\dashboard.html:48
+msgid "Sana ↓"
+msgstr "Дата ↓"
+
+#: .\templates\dashboard.html:49
+msgid "Sana ↑"
+msgstr "Дата ↑"
+
+#: .\templates\dashboard.html:50
+msgid "Summa ↓"
+msgstr "Сумма ↓"
+
+#: .\templates\dashboard.html:51
+msgid "Summa ↑"
+msgstr "Сумма ↑"
+
+#: .\templates\dashboard.html:58
+msgid "Qo‘llash"
+msgstr "Применить"
+
+#: .\templates\dashboard.html:59 .\templates\monthly_report.html:47
+msgid "Tozalash"
+msgstr "Очистить"
+
+#: .\templates\dashboard.html:87 .\templates\dashboard.html:110
+#: .\templates\monthly_report.html:74 .\templates\monthly_report.html:97
+#: .\templates\users\profile.html:65 .\templates\users\profile.html:91
+#: .\templates\users\profile.html:143
+msgid "Balans"
+msgstr "Баланс"
+
+#: .\templates\dashboard.html:119 .\templates\users\profile.html:100
+msgid "Umumiy"
+msgstr "ИТОГО"
+
+#: .\templates\dashboard.html:120 .\templates\users\profile.html:101
+msgid "Umumiy (UZS)"
+msgstr "Общий (UZS)"
+
+#: .\templates\dashboard.html:127 .\templates\users\profile.html:106
+msgid "Umumiy balans"
+msgstr "Общий баланс"
+
+#: .\templates\dashboard.html:133 .\templates\users\profile.html:114
+msgid "USD balans kurs bo‘yicha UZS ga qo‘shildi"
+msgstr "Баланс USD добавлен к UZS по курсу"
+
+#: .\templates\dashboard.html:167
+msgid "Ko‘rish"
+msgstr "Просмотр"
+
+#: .\templates\dashboard.html:177
+msgid "Hali tranzaksiya yo‘q."
+msgstr "Пока нет транзакций."
+
+#: .\templates\monthly_report.html:3 .\templates\monthly_report.html:11
+msgid "Hisobot"
+msgstr "Отчёт"
+
+#: .\templates\monthly_report.html:14
+#, python-format
+msgid "%(s)s dan %(e)s gacha kirim/chiqim"
+msgstr "Доход/расход с %(s)s по %(e)s"
+
+#: .\templates\monthly_report.html:16
+#, python-format
+msgid "%(s)s dan boshlab kirim/chiqim"
+msgstr "Доход/расход начиная с %(s)s"
+
+#: .\templates\monthly_report.html:18
+#, python-format
+msgid "%(e)s gacha kirim/chiqim"
+msgstr "Доход/расход до %(e)s"
+
+#: .\templates\monthly_report.html:20
+msgid "Sana oralig‘ini tanlang"
+msgstr "Выберите диапазон дат"
+
+#: .\templates\monthly_report.html:32
+msgid "Boshlanish sana"
+msgstr "Дата начала"
+
+#: .\templates\monthly_report.html:39
+msgid "Tugash sana"
+msgstr "Дата окончания"
+
+#: .\templates\monthly_report.html:46
+msgid "Ko‘rsat"
+msgstr "Показать"
+
+#: .\templates\monthly_report.html:66 .\templates\monthly_report.html:89
+msgid "Jami kirim"
+msgstr "Всего доход"
+
+#: .\templates\monthly_report.html:70 .\templates\monthly_report.html:93
+msgid "Jami chiqim"
+msgstr "Всего расход"
+
+#: .\templates\monthly_report.html:138
+msgid "Bu oraliqda tranzaksiya yo‘q."
+msgstr "В этом диапазоне транзакций нет."
+
+#: .\templates\transaction_detail.html:3 .\templates\transaction_detail.html:11
+msgid "Tranzaksiya"
+msgstr "Транзакция"
+
+#: .\templates\transaction_detail.html:12
+msgid "Batafsil ma’lumot va izohlar"
+msgstr "Подробная информация и комментарии"
+
+#: .\templates\transaction_detail.html:56
+msgid "Izohlar"
+msgstr "Комментарии"
+
+#: .\templates\transaction_detail.html:57
+#, python-format
+msgid "%(n)s ta"
+msgstr "%(n)s шт."
+
+#: .\templates\transaction_detail.html:71
+msgid "Izoh yo‘q"
+msgstr "Комментариев нет"
+
+#: .\templates\transaction_detail.html:76
+#: .\templates\transaction_detail.html:89
+msgid "Izoh qo‘shish"
+msgstr "Добавить комментарий"
+
+#: .\templates\transaction_form.html:3
+msgid "Tranzaksiya form"
+msgstr "Форма транзакции"
+
+#: .\templates\transaction_form.html:11
+msgid "Tranzaksiya qo‘shish / tahrirlash"
+msgstr "Добавить / редактировать транзакцию"
+
+#: .\templates\transaction_form.html:12
+msgid "Kirim yoki chiqimni kiriting"
+msgstr "Введите доход или расход"
+
+#: .\templates\users\login.html:9
 msgid "Tizimga kirish"
 msgstr "Вход в систему"
 
+#: .\templates\users\login.html:10
 msgid "Username va parolni kiriting"
 msgstr "Введите логин и пароль"
 
+#: .\templates\users\login.html:19 .\templates\users\login.html:20
+#: .\templates\users\profile.html:25 .\templates\users\register.html:19
 msgid "Username"
 msgstr "Имя пользователя"
 
+#: .\templates\users\login.html:26 .\templates\users\login.html:27
+#: .\templates\users\register.html:26
 msgid "Parol"
 msgstr "Пароль"
 
+#: .\templates\users\login.html:34
 msgid "Xatolik"
 msgstr "Ошибка"
 
+#: .\templates\users\login.html:34
 msgid "Username yoki parol noto‘g‘ri."
 msgstr "Неверный логин или пароль"
 
+#: .\templates\users\profile.html:3 .\templates\users\profile.html:12
 msgid "Profil"
 msgstr "Профиль"
 
-msgid "Foydalanuvchi ma’lumotlari"
+#: .\templates\users\profile.html:13
+#, fuzzy
+#| msgid "Foydalanuvchi ma’lumotlari"
+msgid "Foydalanuvchi ma’lumotlari va umumiy balans"
 msgstr "Данные пользователя"
 
-msgid "Ism"
-msgstr "Имя"
-
-msgid "Familiya"
-msgstr "Фамилия"
-
+#: .\templates\users\profile.html:17 .\templates\users\profile_edit.html:3
+#: .\templates\users\profile_edit.html:8
 msgid "Profilni tahrirlash"
 msgstr "Редактировать профиль"
 
-msgid "Umumiy hisobot"
-msgstr "Общий отчёт"
+#: .\templates\users\profile.html:29 .\templates\users\profile_edit.html:18
+msgid "Ism"
+msgstr "Имя"
 
+#: .\templates\users\profile.html:34 .\templates\users\profile_edit.html:25
+msgid "Familiya"
+msgstr "Фамилия"
+
+#: .\templates\users\profile.html:55 .\templates\users\profile.html:81
 msgid "Umumiy kirim"
 msgstr "Общий доход"
 
+#: .\templates\users\profile.html:60 .\templates\users\profile.html:86
 msgid "Umumiy chiqim"
 msgstr "Общий расход"
 
+#: .\templates\users\profile.html:128
+msgid "Har bir hisob bo‘yicha balans"
+msgstr "Баланс по каждому счёту"
+
+#: .\templates\users\profile.html:169
 msgid "Hisob yo‘q"
 msgstr "Счетов нет"
 
+#: .\templates\users\profile_edit.html:9
 msgid "Email / Ism / Familiyani o‘zgartiring"
 msgstr "Измените Email / Имя / Фамилию"
 
+#: .\templates\users\profile_edit.html:32
 msgid "Email"
 msgstr "Email"
 
+#: .\templates\users\register.html:10
 msgid "Yangi foydalanuvchi yaratish"
 msgstr "Создать нового пользователя"
 
+#: .\templates\users\register.html:33
 msgid "Parolni takrorlash"
 msgstr "Повторите пароль"
+
+#~ msgid "Umumiy hisobot"
+#~ msgstr "Общий отчёт"
+
+#~ msgid "Tartiblash (order)"
+#~ msgstr "Сортировка (order)"
+
+#~ msgid "Summa ↓ (katta)"
+#~ msgstr "Сумма ↓ (больше)"
+
+#~ msgid "Summa ↑ (kichik)"
+#~ msgstr "Сумма ↑ (меньше)"
+
+#~ msgid "Turi (IN/EX)"
+#~ msgstr "Тип (IN/EX)"

@@ -1,13 +1,14 @@
-from django.db.models import DecimalField, Sum, When, F, Case   # ✅ Case shu yerda
+from decimal import Decimal
+
+from django.db.models import DecimalField, Sum
 from django.db.models.functions import Coalesce
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-from finance.models import Account, Transaction
-from .forms import RegisterForm, ProfileForm, ProfileEditForm
-
+from finance.models import Account, Transaction, ExchangeRate
+from .forms import RegisterForm, ProfileEditForm
 
 
 def user_login(request):
@@ -17,7 +18,7 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
         if user:
             login(request, user)
-            return redirect("finance:dashboard")  # finance dashboard
+            return redirect("finance:dashboard")
         else:
             messages.error(request, "Login yoki parol xato")
     return render(request, "users/login.html")
@@ -33,36 +34,64 @@ def register(request):
     if form.is_valid():
         user = form.save()
         login(request, user)
-        return redirect('finance:dashboard')
-    return render(request, 'users/register.html', {'form': form})
+        return redirect("finance:dashboard")
+    return render(request, "users/register.html", {"form": form})
+
+
+# ✅ Professional SUM helper (DecimalField xatosiz)
+def _sum_amount(qs):
+    return qs.aggregate(
+        s=Coalesce(
+            Sum("amount"),
+            Decimal("0"),
+            output_field=DecimalField(max_digits=15, decimal_places=2),
+        )
+    )["s"]
+
+
+def _get_usd_rate():
+    # eng oxirgi kurs: 1 USD = rate UZS
+    obj = ExchangeRate.objects.filter(base="USD", quote="UZS").order_by("-date").first()
+    return obj.rate if obj else Decimal("0")
 
 
 @login_required
 def profile(request):
-    accounts = list(Account.objects.filter(user=request.user))
+    accounts = list(Account.objects.filter(user=request.user).order_by("-id"))
     tx = Transaction.objects.filter(user=request.user).select_related("account")
 
-    # Har bir account uchun balansni hisoblab, account obyektiga qo‘shamiz
+    # ✅ har bir account uchun balans (ORM)
     for acc in accounts:
-        income = sum(t.amount for t in tx if t.type == "IN" and t.account_id == acc.id)
-        expense = sum(t.amount for t in tx if t.type == "EX" and t.account_id == acc.id)
-        acc.calculated_balance = income - expense  # ✅ template’da ishlatamiz
+        inc = _sum_amount(tx.filter(type="IN", account=acc))
+        exp = _sum_amount(tx.filter(type="EX", account=acc))
+        acc.calculated_balance = inc - exp  # template’da ishlatamiz
 
-    # USD umumiy
-    income_usd = sum(t.amount for t in tx if t.type == "IN" and t.account.currency == "USD")
-    expense_usd = sum(t.amount for t in tx if t.type == "EX" and t.account.currency == "USD")
+    # ✅ USD totals (ORM)
+    income_usd = _sum_amount(tx.filter(type="IN", account__currency="USD"))
+    expense_usd = _sum_amount(tx.filter(type="EX", account__currency="USD"))
+    balance_usd = income_usd - expense_usd
 
-    # UZS umumiy
-    income_uzs = sum(t.amount for t in tx if t.type == "IN" and t.account.currency == "UZS")
-    expense_uzs = sum(t.amount for t in tx if t.type == "EX" and t.account.currency == "UZS")
+    # ✅ UZS totals (ORM)
+    income_uzs = _sum_amount(tx.filter(type="IN", account__currency="UZS"))
+    expense_uzs = _sum_amount(tx.filter(type="EX", account__currency="UZS"))
+    balance_uzs = income_uzs - expense_uzs
+
+    # ✅ TOTAL (UZS) kurs bilan
+    usd_rate = _get_usd_rate()
+    total_balance_uzs = balance_uzs + (balance_usd * usd_rate)
 
     totals = {
         "income_usd": income_usd,
         "expense_usd": expense_usd,
-        "balance_usd": income_usd - expense_usd,
+        "balance_usd": balance_usd,
+
         "income_uzs": income_uzs,
         "expense_uzs": expense_uzs,
-        "balance_uzs": income_uzs - expense_uzs,
+        "balance_uzs": balance_uzs,
+
+        # TOTAL
+        "usd_rate": usd_rate,
+        "total_balance_uzs": total_balance_uzs,
     }
 
     return render(request, "users/profile.html", {
@@ -74,11 +103,9 @@ def profile(request):
 @login_required
 def profile_edit(request):
     form = ProfileEditForm(request.POST or None, instance=request.user)
-
     if request.method == "POST":
         if form.is_valid():
             form.save()
             messages.success(request, "Profil yangilandi ✅")
             return redirect("users:profile")
-
     return render(request, "users/profile_edit.html", {"form": form})

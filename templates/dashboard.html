@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{% trans "Dashboard" %}{% endblock %}
+{% block title %}{% trans "Boshqaruv paneli" %}{% endblock %}
 
 {% block content %}
 <div class="grid">
 
+  <!-- ====== TOP FILTER CARD ====== -->
   <div class="card">
     <div class="row" style="justify-content:space-between">
       <div>
-        <div class="h1">{% trans "Dashboard" %}</div>
+        <div class="h1">{% trans "Boshqaruv paneli" %}</div>
       </div>
 
       <a class="btn primary" href="{% url 'finance:transaction_create' %}">
@@ -42,13 +43,12 @@
 
       <div class="col-6">
         <div class="field">
-          <label>{% trans "Tartiblash (order)" %}</label>
+          <label>{% trans "Tartiblash" %}</label>
           <select name="order">
-            <option value="-date" {% if order == "-date" %}selected{% endif %}>{% trans "Sana ↓ (yangi)" %}</option>
-            <option value="date" {% if order == "date" %}selected{% endif %}>{% trans "Sana ↑ (eski)" %}</option>
-            <option value="-amount" {% if order == "-amount" %}selected{% endif %}>{% trans "Summa ↓ (katta)" %}</option>
-            <option value="amount" {% if order == "amount" %}selected{% endif %}>{% trans "Summa ↑ (kichik)" %}</option>
-            <option value="type" {% if order == "type" %}selected{% endif %}>{% trans "Turi (IN/EX)" %}</option>
+            <option value="-date" {% if order == "-date" %}selected{% endif %}>{% trans "Sana ↓" %}</option>
+            <option value="date" {% if order == "date" %}selected{% endif %}>{% trans "Sana ↑" %}</option>
+            <option value="-amount" {% if order == "-amount" %}selected{% endif %}>{% trans "Summa ↓" %}</option>
+            <option value="amount" {% if order == "amount" %}selected{% endif %}>{% trans "Summa ↑" %}</option>
           </select>
         </div>
       </div>
@@ -63,57 +63,79 @@
     </form>
   </div>
 
+  <!-- ====== KPI CARDS ====== -->
   <div class="card">
     <div class="row" style="justify-content:flex-end; gap:14px; flex-wrap:wrap;">
 
+      <!-- USD CARD -->
       <div class="card" style="padding:14px; min-width:320px;">
         <div class="row" style="justify-content:space-between;">
-          <div class="h1" style="font-size:16px; margin:0;">USD</div>
+          <div class="h1" style="font-size:16px;">USD</div>
           <span class="badge">{% trans "Dollar" %}</span>
         </div>
         <div class="hr"></div>
         <div class="row" style="justify-content:flex-end">
-          <div class="kpi in" style="min-width:180px">
-            <div class="label">{% trans "Jami kirim" %}</div>
+          <div class="kpi in">
+            <div class="label">{% trans "Kirim" %}</div>
             <div class="value">{{ income_usd }}</div>
           </div>
-          <div class="kpi ex" style="min-width:180px">
-            <div class="label">{% trans "Jami chiqim" %}</div>
+          <div class="kpi ex">
+            <div class="label">{% trans "Chiqim" %}</div>
             <div class="value">{{ expense_usd }}</div>
           </div>
-          <div class="kpi bal" style="min-width:180px">
+          <div class="kpi bal">
             <div class="label">{% trans "Balans" %}</div>
             <div class="value">{{ balance_usd }}</div>
           </div>
         </div>
       </div>
 
+      <!-- UZS CARD -->
       <div class="card" style="padding:14px; min-width:320px;">
         <div class="row" style="justify-content:space-between;">
-          <div class="h1" style="font-size:16px; margin:0;">UZS</div>
+          <div class="h1" style="font-size:16px;">UZS</div>
           <span class="badge">{% trans "So'm" %}</span>
         </div>
         <div class="hr"></div>
         <div class="row" style="justify-content:flex-end">
-          <div class="kpi in" style="min-width:180px">
-            <div class="label">{% trans "Jami kirim" %}</div>
+          <div class="kpi in">
+            <div class="label">{% trans "Kirim" %}</div>
             <div class="value">{{ income_uzs }}</div>
           </div>
-          <div class="kpi ex" style="min-width:180px">
-            <div class="label">{% trans "Jami chiqim" %}</div>
+          <div class="kpi ex">
+            <div class="label">{% trans "Chiqim" %}</div>
             <div class="value">{{ expense_uzs }}</div>
           </div>
-          <div class="kpi bal" style="min-width:180px">
+          <div class="kpi bal">
             <div class="label">{% trans "Balans" %}</div>
             <div class="value">{{ balance_uzs }}</div>
           </div>
         </div>
       </div>
 
-    </div>
+      <!-- TOTAL CARD -->
+        <div class="card" style="padding:14px; min-width:320px; border:2px solid #2563eb;">
+          <div class="row" style="justify-content:space-between;">
+            <div class="h1" style="font-size:16px; margin:0;">{% trans "Umumiy" %}</div>
+            <span class="badge">{% trans "Umumiy (UZS)" %}</span>
+          </div>
 
-    <div class="hr"></div>
+          <div class="hr"></div>
 
+          <div class="row" style="justify-content:flex-end">
+            <div class="kpi bal">
+              <div class="label">{% trans "Umumiy balans" %}</div>
+              <div class="value">{{ total_balance_uzs }}</div>
+            </div>
+          </div>
+
+          <div class="muted" style="margin-top:8px; font-size:12px;">
+            {% trans "USD balans kurs bo‘yicha UZS ga qo‘shildi" %}
+          </div>
+        </div>
+
+
+    <!-- ====== TRANSACTIONS TABLE ====== -->
     <div class="table-wrap">
       <table>
         <tr>
@@ -139,15 +161,11 @@
           <td>{{ t.account }}</td>
           <td>
             {{ t.amount }}
-            <span class="badge" style="margin-left:6px;">
-              {{ t.account.currency }}
-            </span>
+            <span class="badge">{{ t.account.currency }}</span>
           </td>
-
           <td class="row">
             <a class="btn" href="{% url 'finance:transaction_detail' t.id %}">{% trans "Ko‘rish" %}</a>
             <a class="btn" href="{% url 'finance:transaction_update' t.id %}">{% trans "Tahrirlash" %}</a>
-
             <form method="post" action="{% url 'finance:transaction_delete' t.id %}">
               {% csrf_token %}
               <button class="btn danger" type="submit">{% trans "O‘chirish" %}</button>
@@ -161,7 +179,7 @@
         {% endfor %}
       </table>
     </div>
-  </div>
 
+  </div>
 </div>
 {% endblock %}

@@ -13,7 +13,7 @@
       </div>
 
       <div class="row">
-        <a class="btn ghost" href="{% url 'finance:dashboard' %}">← {% trans "Dashboard" %}</a>
+        <a class="btn ghost" href="{% url 'finance:dashboard' %}">← {% trans "Boshqaruv paneli" %}</a>
         <a class="btn" href="{% url 'finance:transaction_update' transaction.id %}">{% trans "Tahrirlash" %}</a>
         <form method="post" action="{% url 'finance:transaction_delete' transaction.id %}">
           {% csrf_token %}

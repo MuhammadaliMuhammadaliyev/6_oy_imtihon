@@ -21,7 +21,7 @@
           {% endif %}
         </div>
       </div>
-      <a class="btn ghost" href="{% url 'finance:dashboard' %}">← {% trans "Dashboard" %}</a>
+      <a class="btn ghost" href="{% url 'finance:dashboard' %}">← {% trans "Boshqaruv paneli" %}</a>
     </div>
 
     <div class="hr"></div>
@@ -50,22 +50,56 @@
     </form>
   </div>
 
+  <!-- ✅ KPI: USD va UZS alohida -->
   <div class="card">
-    <div class="row" style="justify-content:flex-end">
-      <div class="kpi in" style="min-width:180px">
-        <div class="label">{% trans "Jami kirim" %}</div>
-        <div class="value">{{ income }}</div>
+    <div class="row" style="gap:16px; justify-content:flex-end; flex-wrap:wrap; align-items:stretch;">
+
+      <!-- UZS -->
+      <div class="card" style="padding:14px; min-width:320px; background:var(--card2); box-shadow:none;">
+        <div class="row" style="justify-content:space-between;">
+          <b>UZS</b>
+          <span class="badge">{% trans "So'm" %}</span>
+        </div>
+        <div class="hr"></div>
+        <div class="row" style="justify-content:flex-end">
+          <div class="kpi in" style="min-width:180px">
+            <div class="label">{% trans "Jami kirim" %}</div>
+            <div class="value">{{ income_uzs }}</div>
+          </div>
+          <div class="kpi ex" style="min-width:180px">
+            <div class="label">{% trans "Jami chiqim" %}</div>
+            <div class="value">{{ expense_uzs }}</div>
+          </div>
+          <div class="kpi bal" style="min-width:180px">
+            <div class="label">{% trans "Balans" %}</div>
+            <div class="value">{{ balance_uzs }}</div>
+          </div>
+        </div>
       </div>
 
-      <div class="kpi ex" style="min-width:180px">
-        <div class="label">{% trans "Jami chiqim" %}</div>
-        <div class="value">{{ expense }}</div>
+      <!-- USD -->
+      <div class="card" style="padding:14px; min-width:320px; background:var(--card2); box-shadow:none;">
+        <div class="row" style="justify-content:space-between;">
+          <b>USD</b>
+          <span class="badge">{% trans "Dollar" %}</span>
+        </div>
+        <div class="hr"></div>
+        <div class="row" style="justify-content:flex-end">
+          <div class="kpi in" style="min-width:180px">
+            <div class="label">{% trans "Jami kirim" %}</div>
+            <div class="value">{{ income_usd }}</div>
+          </div>
+          <div class="kpi ex" style="min-width:180px">
+            <div class="label">{% trans "Jami chiqim" %}</div>
+            <div class="value">{{ expense_usd }}</div>
+          </div>
+          <div class="kpi bal" style="min-width:180px">
+            <div class="label">{% trans "Balans" %}</div>
+            <div class="value">{{ balance_usd }}</div>
+          </div>
+        </div>
       </div>
 
-      <div class="kpi bal" style="min-width:180px">
-        <div class="label">{% trans "Balans" %}</div>
-        <div class="value">{{ balance }}</div>
-      </div>
     </div>
 
     <div class="hr"></div>
@@ -92,7 +126,12 @@
           </td>
           <td>{{ t.category }}</td>
           <td>{{ t.account }}</td>
-          <td>{{ t.amount }}</td>
+          <td>
+            {{ t.amount }}
+            <span class="badge" style="margin-left:6px;">
+              {{ t.account.currency }}
+            </span>
+          </td>
         </tr>
         {% empty %}
         <tr>

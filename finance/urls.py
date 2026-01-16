@@ -1,7 +1,8 @@
 from django.urls import path
 from .views import (dashboard, transaction_create, transaction_update, transaction_detail, transaction_delete,
                     account_list, account_create, account_update,
-                    account_delete, category_list, category_create, category_update, category_delete, monthly_report,)
+                    account_delete, category_list, category_create, category_update, category_delete, monthly_report,
+                    transfer_create, )
 
 app_name = "finance"
 
@@ -20,4 +21,6 @@ urlpatterns = [
     path("categories/<int:pk>/update/", category_update, name="category_update"),
     path("categories/<int:pk>/delete/", category_delete, name="category_delete"),
     path("report/monthly/", monthly_report, name="monthly_report"),
+    path("transfer/create/", transfer_create, name="transfer_create"),
+
 ]
